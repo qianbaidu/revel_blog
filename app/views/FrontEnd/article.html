@@ -1,0 +1,243 @@
+{{set . "title" "Home"}}
+{{template "header.html" .}}
+<style>
+  pre{
+    background: #dddddd;
+  }
+  /* article content ======================================================================================================== */
+  .article-header{
+    margin-bottom: 20px;
+    padding: 25px 0;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+  }
+  .article-title{margin-top: 0;font-size: 26px;line-height: 36px;}
+  .article-title a,
+  .article-title a:hover{
+    color: #555;
+
+  }
+  .article-meta{
+    font-size: 12px;
+    color: #999;
+  }
+  .article-meta .item{
+    margin-right: 20px;
+  }
+
+  .article-content{font-size:15px;line-height:25px;word-wrap:break-word;}
+  .article-content img{margin: 5px 0; display:block;max-width:100%;height:auto}
+  .article-content h2, .article-content h3, .article-content h4ï¼Œ .article-content h5{padding:10px 0;margin-bottom:18px;color: #555;font-weight:bold;}
+  .article-content h2{font-size:18px;font-weight:bold;margin:18px 0;border-bottom: 1px solid #eaeaea;}
+  .article-content h3{font-size:16px;}
+  .article-content h4{font-size:15px;}
+  .article-content h5{font-size:14px;}
+  .article-content ul, .article-content ol{margin:0 0 18px 50px}
+  .article-content ul{list-style: disc;}
+  .article-content ol{list-style: decimal;}
+  .article-content li{margin-bottom: 6px;}
+  .article-content p{margin-bottom:18px;word-wrap:break-word}
+  .article-content pre{word-wrap:break-word}
+  .article-content table{border-top:solid 1px #ddd;border-left:solid 1px #ddd;width:100%;margin-bottom:18px}
+  .article-content table th{background-color:#f9f9f9;text-align:center}
+  .article-content table td,.article-content table th{border-bottom:solid 1px #ddd;border-right:solid 1px #ddd;padding:5px 10px}
+  .article-content .alignnone{margin:0 auto;}
+  .article-content .alignleft{float:left;text-align:left;margin-right:10px}
+  .article-content .aligncenter{margin: 0 auto;text-align: center;display: block;}
+  .article-content .alignright{float:right;text-align:right;margin-left:10px}
+  .article-content .wp-caption{margin-bottom: 18px;background-color: #f6f6f6;padding: 10px 10px 1px;max-width: 100%}
+  .article-content .wp-caption img{margin: 0 0 5px;}
+  .article-content .wp-caption p{margin-bottom: 10px;text-indent: 0;}
+  .article-content .wp-caption.alignnone{text-align: center;}
+  .article-content .wp-caption:hover .wp-caption-text{color: #45B6F7;}
+  .article-content a{text-decoration:underline;color: #45B6F7;}
+  .article-content a:hover{color: #FF5E52;}
+
+  .article-content pre,.comment pre{margin:20px 0;font:12px/20px 'courier new';background:#272822;padding:10px 15px;color:#F8F8D4;border:none}
+  .article-content blockquote{margin: 30px 30px;padding: 15px 20px 1px;font-size: 16px;color: #999;border-left: 5px solid #EEE;}
+  .article-content blockquote p{margin:0;padding:0;margin-bottom: 10px;}
+
+  .post-copyright {
+    background-color: #eee;
+    padding-right: 30px;
+    font-size: 12px;
+    padding: 3px 0;
+    border-radius: 3px;
+    color: #aaa;
+    text-align: center;
+  }
+  .article-content .post-copyright a, .post-copyright a:hover {
+    color: #aaa;
+    text-decoration: none;
+  }
+  .post-copyright:hover {
+    background-color: #45B6F7;
+    color: #fff;
+  }
+  .post-copyright:hover a {
+    color: #fff;
+  }
+
+  .asb-post-footer b{font-weight:normal;color:#41C282}
+  .asb-post-footer strong{font-weight:normal;color:#FD6A5E}
+  .asb-post-footer a{text-decoration:none;border-bottom:solid 2px #eee;}
+  .asb-post-footer a:hover{border-bottom-color:#1FAEFF;}
+
+
+  /* article tags
+   * ====================================================
+  */
+  .article-tags {
+    margin: 30px 0;
+    text-align: center;
+  }
+  .article-tags a {
+    display: inline-block;
+    padding: 4px 7px 3px;
+    margin: 0 4px 4px 0;
+    color: #fff;
+    font-size: 12px;
+    background-color: #45B6F7;
+    opacity: 0.85;
+    filter:alpha(opacity=85);
+  }
+  .article-tags a:hover {
+    color: #fff;
+    opacity: 1;
+    filter:alpha(opacity=100);
+  }
+
+
+  .tag-clouds {
+    overflow: hidden;
+  }
+  .tag-clouds a {
+    float: left;
+    margin: 0 1% 1% 0;
+    padding: 0 10px;
+    line-height: 28px;
+    height: 28px;
+    width: 19%;
+    color: #999;
+    background-color: #eee;
+    font-size: 12px;
+    border-radius: 2px;
+  }
+  .tag-clouds a small{
+    margin-left: 5px;
+  }
+  .tag-clouds a:hover{
+    color: #fff;
+    background-color: #4DAAE6;
+  }
+
+
+
+  /* article nav
+   * ====================================================
+  */
+  .article-nav {
+    overflow: hidden;
+    margin-bottom: 30px;
+    font-size: 14px;
+    color: #bbb;
+  }
+  .article-nav span {
+    float: left;
+    position: relative;
+    width: 50%;
+  }
+  .article-nav span.article-nav-next {
+    float: right;
+    text-align: right
+  }
+  .article-nav span.article-nav-next::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    display: block;
+    width: 1px;
+    background-color: #eee;
+  }
+  .article-nav a {
+    color: #999;
+    margin-right: 10px;
+    display: inline-block;
+  }
+  .article-nav span.article-nav-next a {
+    margin-left: 10px;
+    margin-right: 0;
+  }
+  .article-nav a:hover {
+    color: #45B6F7;
+  }
+
+
+
+
+</style>
+<section class="container">
+  <div class="content-wrap">
+    <div class="content">
+      <header class="article-header">
+        <h1 class="article-title"><a href="#" title="{{.article.Title}}" >{{.article.Title}}</a></h1>
+        <div class="article-meta"> <span class="item article-meta-time">
+	  <time class="time" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{.article.Title}}"><i class="glyphicon glyphicon-time"></i> {{ .article.CreatedAt }}</time>
+	  </span> <span class="item article-meta-source" data-toggle="tooltip" data-placement="bottom" title="" data-origin
+                    al-title="来源：奇葩菌"><i class="glyphicon glyphicon-globe"></i> 奇葩菌</span>
+            <span class="item article-meta-category" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{.article.Categories.CategoryName}}"><i class="glyphicon glyphicon-list"></i> <a href="{{.baseUrl}}/list/{{.article.CategoryId}}" title="{{.article.Categories.CategoryName}}" >{{.article.Categories.CategoryName}}</a></span>
+            <span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="浏览量：{{.article.Views}}"><i class="glyphicon glyphicon-eye-open"></i> {{.article.Views}}</span>
+          <span class="item article-meta-comment" style="display: none;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="评论量"><i class="glyphicon glyphicon-comment"></i> 4</span> </div>
+      </header>
+      <article class="article-content">
+        {{ raw .article.Content}}
+        <div class="bdsharebuttonbox" style="margin-top: 50px;"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a></div>
+
+        <script>                  window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": false, "bdPic": "", "bdStyle": "1", "bdSize": "32" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=0.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+      </article>
+      <div class="article-tags" style="display: none">标签：<a href="#" rel="tag" >奇葩菌</a>
+      </div>
+      <div class="relates" style="display: none;">
+        <div class="title">
+          <h3>相关推荐</h3>
+        </div>
+        <ul>
+          <li><a href="#" title="" >title</a></li>
+          <li><a href="#" title="" >title</a></li>
+          <li><a href="#" title="" >title</a></li>
+        </ul>
+      </div>
+      <div class="title" id="comment" style="display: none;">
+        <h3>评论</h3>
+      </div>
+      <div id="respond" style="display: none;">
+        <form id="comment-form" name="comment-form" action="" method="POST">
+          <div class="comment">
+            <input name="" id="" class="form-control" size="22" placeholder="您的昵称（必填）" maxlength="15" autocomplete="off" tabindex="1" type="text">
+            <input name="" id="" class="form-control" size="22" placeholder="您的网址或邮箱（非必填）" maxlength="58" autocomplete="off" tabindex="2" type="text">
+            <div class="comment-box">
+              <textarea placeholder="您的评论或留言（必填）" name="comment-textarea" id="comment-textarea" cols="100%" rows="3" tabindex="3"></textarea>
+              <div class="comment-ctrl">
+                <div class="comment-prompt" style="display: none;"> <i class="fa fa-spin fa-circle-o-notch"></i> <span class="comment-prompt-text">评论正在提交中...请稍后</span> </div>
+                <div class="comment-success" style="display: none;"> <i class="fa fa-check"></i> <span class="comment-prompt-text">评论提交成功...</span> </div>
+                <button type="submit" name="comment-submit" id="comment-submit" tabindex="4">评论</button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+      <div id="postcomments" style="display: none;">
+        <ol id="comment_list" class="commentlist">
+          <li class="comment-content"><span class="comment-f">#2</span><div class="comment-main"><p><a class="address" href="#" rel="nofollow" target="_blank">木庄网络博客</a><span class="time">(2016/10/28 11:41:03)</span><br>不错的网站主题，看着相当舒服</p></div></li>
+          <li class="comment-content"><span class="comment-f">#1</span><div class="comment-main"><p><a class="address" href="#" rel="nofollow" target="_blank">木庄网络博客</a><span class="time">(2016/10/14 21:02:39)</span><br>博客做得好漂亮哦！</p></div></li></ol>
+      </div>
+    </div>
+  </div>
+  {{template "sidebar.html" .}}
+</section>
+
+
+{{template "footer.html" .}}
